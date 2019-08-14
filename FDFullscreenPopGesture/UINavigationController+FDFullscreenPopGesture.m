@@ -184,7 +184,9 @@ typedef void (^_FDViewControllerWillAppearInjectBlock)(UIViewController *viewCon
     if (!self.fd_viewControllerBasedNavigationBarAppearanceEnabled) {
         return;
     }
-    
+    if ([appearingViewController.description rangeOfString:@"CKSMSComposeController"].location != NSNotFound) {
+        return;
+    }
     __weak typeof(self) weakSelf = self;
     _FDViewControllerWillAppearInjectBlock block = ^(UIViewController *viewController, BOOL animated) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
